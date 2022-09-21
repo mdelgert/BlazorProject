@@ -1,4 +1,6 @@
 using BlazorProject.Server.Data;
+using BlazorProject.Shared;
+using BlazorProject.Shared.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -8,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+var sharedContext = new SharedContext();
+builder.Services.AddSingleton(_ => sharedContext);
+builder.Services.AddSingleton<IContactService, ContactService>();
 
 var app = builder.Build();
 

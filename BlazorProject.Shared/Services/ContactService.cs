@@ -3,9 +3,10 @@
 public interface IContactService
 {
     Task Create(Contact contact);
-    Task<List<Contact>> ReadAll();
+    Task<Contact?> FindById(int id);
+    Task<List<Contact?>> ReadAll();
     Task Update(Contact contact);
-    Task Delete(Contact contact);
+    Task Delete(int id);
 }
 
 public class ContactService : IContactService
@@ -23,7 +24,13 @@ public class ContactService : IContactService
         await _dbContext.SaveChangesAsync();
     }
     
-    public Task<List<Contact>> ReadAll()
+    public async Task<Contact?> FindById(int id)
+    {
+        var contact = await _dbContext.Contacts.FindAsync(id);
+        return contact;
+    }
+    
+    public Task<List<Contact?>> ReadAll()
     {
         var contacts = _dbContext.Contacts.ToList();
         return Task.FromResult(contacts);
@@ -35,9 +42,10 @@ public class ContactService : IContactService
         await _dbContext.SaveChangesAsync();
     }
     
-    public async Task Delete(Contact contact)
+    public async Task Delete(int id)
     {
-        _dbContext.Contacts.Remove(contact);
+        var contact = await _dbContext.Contacts.FindAsync(id);
+        if (contact != null) _dbContext.Contacts.Remove(contact);
         await _dbContext.SaveChangesAsync();
     }
     

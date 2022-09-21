@@ -1,0 +1,101 @@
+﻿@page "/contact/add"
+@page "/contact/edit/{contactId:int}"
+@inject NavigationManager NavigationManager
+@using BlazorProject.Shared.Models
+@using BlazorProject.Shared.Services
+@inject IContactService _contactService
+
+<h1>@Title Contact</h1>
+<hr />
+
+<EditForm Model="@contact" OnValidSubmit="SaveContact">
+    <DataAnnotationsValidator />
+    <div class="mb-3">
+        <label for="FirstName" class="form-label">First Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.FirstName" />
+        </div>
+        <ValidationMessage For="@(() => contact.FirstName)" />
+    </div>
+    <div class="mb-3">
+        <label for="LastName" class="form-label">Last Name</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.LastName" />
+        </div>
+        <ValidationMessage For="@(() => contact.LastName)" />
+    </div>
+    <div class="mb-3">
+        <label for="Address" class="form-label">Address</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.Address" />
+        </div>
+        <ValidationMessage For="@(() => contact.Address)" />
+    </div>
+    <div class="mb-3">
+        <label for="City" class="form-label">City</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.City" />
+        </div>
+        <ValidationMessage For="@(() => contact.City)" />
+    </div>
+    <div class="mb-3">
+        <label for="State" class="form-label">State</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.State" />
+        </div>
+        <ValidationMessage For="@(() => contact.State)" />
+    </div>
+    <div class="mb-3">
+        <label for="Zip" class="form-label">Zip</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.ZipCode" />
+        </div>
+        <ValidationMessage For="@(() => contact.ZipCode)" />
+    </div>
+    <div class="mb-3">
+        <label for="PhoneNumber" class="form-label">Phone</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="contact.PhoneNumber" />
+        </div>
+        <ValidationMessage For="@(() => contact.PhoneNumber)" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int contactId { get; set; }
+
+    protected string Title = "Add";
+    protected Contact? contact = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (contactId != 0)
+        {
+            Title = "Edit";
+            contact = await _contactService.FindById(contactId);
+        }
+    }
+
+    protected async Task SaveContact()
+    {
+        if (contact.ContactId != 0)
+        {
+            await _contactService.Update(contact);
+        }
+        else
+        {
+            await _contactService.Create(contact);
+        }
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        NavigationManager.NavigateTo("/contactlist");
+    }
+}

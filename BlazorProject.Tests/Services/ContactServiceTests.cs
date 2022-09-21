@@ -7,7 +7,7 @@ public class ContactServiceTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly IContactService _contactService;
-    private const int BatchSize = 10;
+    private const int BatchSize = 100;
 
     public ContactServiceTests(ITestOutputHelper testOutputHelper, IContactService contactService)
     {
@@ -35,6 +35,13 @@ public class ContactServiceTests
 
             await _contactService.Create(contact);
         }
+    }
+
+    [Fact]
+    public async Task FindById()
+    {
+        var contact = await _contactService.FindById(1);
+        if (contact != null) _testOutputHelper.WriteLine($"{contact.ContactId} {contact.FirstName}");
     }
     
     [Fact]
@@ -64,7 +71,7 @@ public class ContactServiceTests
         var contacts = await _contactService.ReadAll();
         foreach (var contact in contacts)
         {
-            await _contactService.Delete(contact);
+            await _contactService.Delete(contact.ContactId);
         }
     }
 }

@@ -1,0 +1,112 @@
+﻿@page "/contactlist"
+@using BlazorProject.Shared.Models
+@using BlazorProject.Shared.Services
+@using BlazorProject.Shared
+@inject IContactService _contactService
+
+<h3>Contacts List</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <a href='/contact/add' class="btn btn-primary" role="button">
+            <i class="fas fa-user-plus"></i>
+            Add User
+        </a>
+    </div>
+    <div class="input-group col">
+        <input type="text" class="form-control" placeholder="Search contact"
+               @bind="SearchString" @bind:event="oninput" @onkeyup="FilterUser" />
+        @if (SearchString.Length > 0)
+        {
+            <div class="input-group-append">
+                <button class="btn btn-danger" @onclick="ResetSearch">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        }
+    </div>
+</div>
+<br />
+
+@if (contactList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-striped align-middle table-bordered">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var contact in contactList)
+            {
+                <tr>
+                    <td>@contact.ContactId</td>
+                    <td>@contact.FirstName</td>
+                    <td>@contact.LastName</td>
+                    <td>@contact.PhoneNumber</td>
+                    <td>@contact.Address</td>
+                    <td>
+                        <a href='/contact/edit/@contact.ContactId' class="btn btn-outline-dark" role="button">
+                            Edit
+                        </a>
+                        <a href='/contact/delete/@contact.ContactId' class="btn btn-outline-danger" role="button">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected List<Contact?> contactList = new();
+    protected List<Contact?> searchContactData = new();
+    protected Contact contact = new();
+    protected string SearchString { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetContact();
+    }
+
+    protected async Task GetContact()
+    {
+        contactList = await _contactService.ReadAll();
+        searchContactData = contactList;
+    }
+
+    protected void FilterUser()
+    {
+        if (!string.IsNullOrEmpty(SearchString))
+        {
+            contactList = searchContactData
+                .Where(x => x.LastName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) != -1)
+                .ToList();
+        }
+        else
+        {
+            contactList = searchContactData;
+        }
+    }
+
+    protected void DeleteConfirm(int contactId)
+    {
+        contact = contactList.FirstOrDefault(x => x.ContactId == contactId);
+    }
+
+    public void ResetSearch()
+    {
+        SearchString = string.Empty;
+        contactList = searchContactData;
+    }
+}

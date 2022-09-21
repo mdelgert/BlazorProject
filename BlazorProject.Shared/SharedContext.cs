@@ -2,13 +2,14 @@
 
 public class SharedContext: DbContext
 {
-    public DbSet<Contact?> Contacts { get; set; }
-    
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Note> Notes { get; set; }
+
     public SharedContext()
     {
         //SQLitePCL.Batteries_V2.Init();
-        //Database.EnsureDeleted();
-        //Database.EnsureCreated();
+        Database.EnsureDeleted();
+        Database.EnsureCreated();
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

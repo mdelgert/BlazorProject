@@ -2,7 +2,7 @@
 
 public interface IContactService
 {
-    Task Create(Contact contact);
+    Task<int> Create(Contact contact);
     Task<Contact?> FindById(int id);
     Task<List<Contact?>> ReadAll();
     Task Update(Contact contact);
@@ -18,10 +18,11 @@ public class ContactService : IContactService
         _dbContext = dbContext;
     }
     
-    public async Task Create(Contact contact)
+    public async Task<int> Create(Contact contact)
     {
         _dbContext.Contacts.Add(contact);
-        await _dbContext.SaveChangesAsync();
+        var id = await _dbContext.SaveChangesAsync();
+        return id;
     }
     
     public async Task<Contact?> FindById(int id)

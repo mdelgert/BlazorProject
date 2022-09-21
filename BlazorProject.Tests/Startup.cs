@@ -7,6 +7,8 @@ public class Startup
         var sharedContext = new SharedContext();
         services.AddSingleton(_ => sharedContext);
         services.AddSingleton<IContactService, ContactService>();
+        services.AddSingleton<INoteService, NoteService>();
+
         services.AddLogging(loggerBuilder =>
         {
             loggerBuilder.ClearProviders();

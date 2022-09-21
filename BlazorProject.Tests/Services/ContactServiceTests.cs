@@ -1,5 +1,4 @@
-﻿using BlazorProject.Shared.Services;
-using Bogus;
+﻿using Bogus;
 using Bogus.DataSets;
 
 namespace BlazorProject.Tests.Services;
@@ -8,7 +7,8 @@ public class ContactServiceTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly IContactService _contactService;
-    
+    private const int BatchSize = 10;
+
     public ContactServiceTests(ITestOutputHelper testOutputHelper, IContactService contactService)
     {
         _testOutputHelper = testOutputHelper;
@@ -16,9 +16,9 @@ public class ContactServiceTests
     }
     
     [Fact]
-    public async Task CreateContactsTest()
+    public async Task CreateTest()
     {
-        for (var i = 1; i <= 10; i++)
+        for (var i = 1; i <= BatchSize; i++)
         {
             var faker = new Faker();
             var phone = new PhoneNumbers();
@@ -34,30 +34,37 @@ public class ContactServiceTests
             };
 
             await _contactService.Create(contact);
-            
-            // await using var context = new SharedContext();
-            // context.Contacts.Add(contact);
-            // var contactId = await context.SaveChangesAsync();
-            // _testOutputHelper.WriteLine($"{contact.Contactid} {contact.FirstName}");
-
         }
     }
     
     [Fact]
-    public void ReadContactsTest()
+    public async Task ReadAllTest()
     {
-
+        var contacts = await _contactService.ReadAll();
+        foreach (var contact in contacts)
+        {
+            _testOutputHelper.WriteLine($"{contact.Contactid} {contact.FirstName}");
+        }
     }
     
     [Fact]
-    public void UpdateContactsTest()
+    public async Task UpdateTest()
     {
-
+        var contacts = await _contactService.ReadAll();
+        foreach (var contact in contacts)
+        {
+            contact.LastName += "-Update";
+            await _contactService.Update(contact);
+        }
     }
     
     [Fact]
-    public void DeleteContactsTest()
+    public async Task DeleteAllTest()
     {
-
+        var contacts = await _contactService.ReadAll();
+        foreach (var contact in contacts)
+        {
+            await _contactService.Delete(contact);
+        }
     }
 }

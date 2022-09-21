@@ -1,0 +1,40 @@
+﻿@page "/fakes"
+@using BlazorProject.Shared.Services
+@inject IContactService ContactService
+@inject INoteService NoteService
+
+<h3>Fakes</h3>
+
+<button class="btn btn-primary" @onclick="CreateContacts">Create Contacts</button>
+
+<button class="btn btn-primary" @onclick="DeleteContacts">Delete Contacts</button>
+
+<button class="btn btn-primary" @onclick="CreateNotes">Create Notes</button>
+
+<button class="btn btn-primary" @onclick="DeleteNotes">Delete Notes</button>
+
+@code {
+        
+        private const int BatchSize = 100;
+
+    private async Task CreateContacts()
+    {
+        await ContactService.CreateFakes(BatchSize);
+    }
+
+    private async Task DeleteContacts()
+    {
+        await ContactService.DeleteAll();
+    }
+
+    private async Task CreateNotes()
+    {
+        await NoteService.CreateFakes(BatchSize);
+    }
+
+    private async Task DeleteNotes()
+    {
+        await NoteService.DeleteAll();
+    }
+
+}

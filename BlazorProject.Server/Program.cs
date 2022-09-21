@@ -11,9 +11,14 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-var sharedContext = new SharedContext();
-builder.Services.AddSingleton(_ => sharedContext);
-builder.Services.AddSingleton<IContactService, ContactService>();
+//var sharedContext = new SharedContext();
+//builder.Services.AddSingleton(_ => sharedContext);
+//builder.Services.AddSingleton<IContactService, ContactService>();
+//builder.Services.AddSingleton<INoteService, NoteService>();
+
+builder.Services.AddDbContext<SharedContext>();
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<INoteService, NoteService>();
 
 var app = builder.Build();
 

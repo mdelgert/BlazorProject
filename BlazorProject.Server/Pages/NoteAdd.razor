@@ -1,5 +1,68 @@
-﻿<h3>NoteAdd</h3>
+﻿@page "/note/add"
+@page "/note/edit/{noteId:int}"
+@using BlazorProject.Shared.Services
+@using BlazorProject.Shared.Models
+@inject INoteService NoteService
+@inject NavigationManager NavigationManager
+
+<h1>@Title Note</h1>
+<hr/>
+
+<EditForm Model="@_note" OnValidSubmit="SaveNote">
+    <DataAnnotationsValidator/>
+    <div class="mb-3">
+        <label for="Title" class="form-label">Title</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="_note.Title"/>
+        </div>
+        <ValidationMessage For="@(() => _note.Title)"/>
+    </div>
+    <div class="mb-3">
+        <label for="Message" class="form-label">Message</label>
+        <div class="col-md-4">
+            <InputText class="form-control" @bind-Value="_note.Message"/>
+        </div>
+        <ValidationMessage For="@(() => _note.Message)"/>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
 
 @code {
 
+    [Parameter]
+    public int NoteId { get; set; }
+    private Note? _note = new();
+    private const string Title = "Add";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (NoteId != 0)
+        {
+            _note = await NoteService.FindById(NoteId);
+        }
+    }
+
+    protected async Task SaveNote()
+    {
+        if (_note != null && _note.NoteId != 0)
+        {
+            //await NoteService.Update(_note);
+        }
+        else
+        {
+            //if (_note != null) await NoteService.Create(_note);
+        }
+        Cancel();
+    }
+
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/notelist");
+    }
+
+
+    //https://www.thecodebuzz.com/efcore-dbcontext-cannot-access-disposed-object-net-core/
 }

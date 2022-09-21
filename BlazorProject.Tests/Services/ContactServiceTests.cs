@@ -43,7 +43,7 @@ public class ContactServiceTests
         var contacts = await _contactService.ReadAll();
         foreach (var contact in contacts)
         {
-            _testOutputHelper.WriteLine($"{contact.Contactid} {contact.FirstName}");
+            _testOutputHelper.WriteLine($"{contact.ContactId} {contact.FirstName}");
         }
     }
     

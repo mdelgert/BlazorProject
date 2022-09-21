@@ -8,7 +8,7 @@ public class SharedContext: DbContext
     {
         //SQLitePCL.Batteries_V2.Init();
         //Database.EnsureDeleted();
-        Database.EnsureCreated();
+        //Database.EnsureCreated();
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -2,16 +2,21 @@
 @using BlazorProject.Shared.Services
 @inject IContactService ContactService
 @inject INoteService NoteService
+@inject IProjectService ProjectService
 
 <h3>Fakes</h3>
 
 <button class="btn btn-primary" @onclick="CreateContacts">Create Contacts</button>
-
+<br/>
 <button class="btn btn-primary" @onclick="DeleteContacts">Delete Contacts</button>
-
+<br/>
 <button class="btn btn-primary" @onclick="CreateNotes">Create Notes</button>
-
+<br/>
 <button class="btn btn-primary" @onclick="DeleteNotes">Delete Notes</button>
+<br/>
+<button class="btn btn-primary" @onclick="CreateProjects">Create Projects</button>
+<br/>
+<button class="btn btn-primary" @onclick="DeleteProjects">Delete Projects</button>
 
 @code {
         
@@ -37,4 +42,13 @@
         await NoteService.DeleteAll();
     }
 
+    private async Task CreateProjects()
+    {
+        await ProjectService.CreateFakes(BatchSize);
+    }
+
+    private async Task DeleteProjects()
+    {
+        await ProjectService.DeleteAll();
+    }
 }

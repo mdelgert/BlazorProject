@@ -19,6 +19,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<SharedContext>();
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<INoteService, NoteService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 

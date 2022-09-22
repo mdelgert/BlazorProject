@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProject.Shared", "BlazorProject.Shared\BlazorProject.Shared.csproj", "{521EA6EB-8822-4F50-98C9-01FFBF432102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorProject.Server", "BlazorProject.Server\BlazorProject.Server.csproj", "{7964BD17-D11D-426E-B71A-8777325A398C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProject.Server", "BlazorProject.Server\BlazorProject.Server.csproj", "{7964BD17-D11D-426E-B71A-8777325A398C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorProject.Client", "BlazorProject.Client\BlazorProject.Client.csproj", "{2EC4A4F3-507B-4C1A-8726-05429F12758F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorProject.Client", "BlazorProject.Client\BlazorProject.Client.csproj", "{2EC4A4F3-507B-4C1A-8726-05429F12758F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

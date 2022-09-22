@@ -4,7 +4,7 @@ public class ProjectServiceTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly IProjectService _projectService;
-    private const int BatchSize = 10;
+    private const int BatchSize = 1000;
 
     public ProjectServiceTests(ITestOutputHelper testOutputHelper, IProjectService projectService)
     {

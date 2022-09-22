@@ -22,7 +22,23 @@ public class NoteService: INoteService
     
     public async Task Create(Note note)
     {
+        if (_dbContext.Database.IsCosmos())
+        {
+            //note.NoteId = _dbContext.Notes.Any() ? _dbContext.Notes.Max(x => x.NoteId) : 1;
+
+            if (_dbContext.Notes.Count() > 0)
+            {
+                note.NoteId = _dbContext.Notes.Max(x => x.NoteId) + 1;
+            }
+            else
+            {
+                note.NoteId = 1;
+            }
+            
+        }
+        
         _dbContext.Notes.Add(note);
+
         await _dbContext.SaveChangesAsync();
     }
     

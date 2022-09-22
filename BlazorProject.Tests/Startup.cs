@@ -8,6 +8,7 @@ public class Startup
         services.AddSingleton(_ => sharedContext);
         services.AddSingleton<IContactService, ContactService>();
         services.AddSingleton<INoteService, NoteService>();
+        services.AddSingleton<IProjectService, ProjectService>();
 
         services.AddLogging(loggerBuilder =>
         {

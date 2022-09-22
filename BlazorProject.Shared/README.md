@@ -8,6 +8,9 @@ Install-Package Microsoft.EntityFrameworkCore.Sqlite
 [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)
 Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
+https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Cosmos/
+Install-Package Microsoft.EntityFrameworkCore.Cosmos
+
 https://www.nuget.org/packages/RandomDataGenerator.Net/
 Install-Package RandomDataGenerator.Net
 

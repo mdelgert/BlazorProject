@@ -7,7 +7,7 @@ public class NoteServiceTests
 {
     private readonly ITestOutputHelper _testOutputHelper;
     private readonly INoteService _noteService;
-    private const int BatchSize = 100;
+    private const int BatchSize = 10;
 
     public NoteServiceTests(ITestOutputHelper testOutputHelper, INoteService noteService)
     {
@@ -22,6 +22,7 @@ public class NoteServiceTests
             var faker = new Faker();
             var note = new Note
             {
+                //NoteId = i,
                 Title = faker.Lorem.Word(),
                 Message = faker.Lorem.Paragraph()
             };

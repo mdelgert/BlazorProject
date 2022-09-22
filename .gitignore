@@ -349,3 +349,6 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /.idea/.idea.BlazorProject/.idea
+/local.settings.json
+/BlazorProject.NotesApp/appsettings.json
+/BlazorProject.NotesApp/Resources/Raw/appsettings.json

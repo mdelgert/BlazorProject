@@ -48,13 +48,14 @@
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
-
     <ItemGroup>
       <PackageReference Include="Bogus" Version="34.0.2" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="6.0.9" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
       <PackageReference Include="RandomDataGenerator.Net" Version="1.0.16" />
     </ItemGroup>
 

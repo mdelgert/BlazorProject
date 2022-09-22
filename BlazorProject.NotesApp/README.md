@@ -16,3 +16,9 @@ Install-Package RandomDataGenerator.Net
 
 [Bogus](https://www.nuget.org/packages/Bogus)
 Install-Package Bogus
+
+https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Binder
+Install-Package Microsoft.Extensions.Configuration.Binder
+
+https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json
+Install-Package Microsoft.Extensions.Configuration.Json

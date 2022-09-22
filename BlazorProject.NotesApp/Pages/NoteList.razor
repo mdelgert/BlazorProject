@@ -31,8 +31,8 @@
 }
 else
 {
-    <table class="table table-striped align-middle table-bordered">
-        <thead class="table-success">
+    <table class="table table-bordered">
+        <thead>
             <tr>
                 <th>ID</th>
                 <th>Title</th>
@@ -44,14 +44,14 @@ else
             @foreach (var note in noteList)
             {
                 <tr>
-                    <td>@note.Id</td>
+                    <td>@note.NoteId</td>
                     <td>@note.Title</td>
                     <td>@note.Message</td>
                     <td>
-                        <a href='/note/edit/@note.Id' class="btn btn-outline-dark" role="button">
+                        <a href='/note/edit/@note.NoteId' class="btn btn-outline-dark" role="button">
                             Edit
                         </a>
-                        <a href='/note/delete/@note.Id' class="btn btn-outline-danger" role="button">
+                        <a href='/note/delete/@note.NoteId' class="btn btn-outline-danger" role="button">
                             Delete
                         </a>
                     </td>
@@ -92,9 +92,9 @@ else
         }
     }
 
-    protected void DeleteConfirm(Guid noteID)
+    protected void DeleteConfirm(int noteID)
     {
-        note = noteList.FirstOrDefault(x => x.Id == noteID);
+        note = noteList.FirstOrDefault(x => x.NoteId == noteID);
     }
 
     public void ResetSearch()

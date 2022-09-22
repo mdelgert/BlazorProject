@@ -5,10 +5,10 @@ namespace BlazorProject.NotesApp.Data;
 public interface INoteService
 {
     Task Create(Note note);
-    Task<Note> FindById(Guid id);
+    Task<Note> FindById(int id);
     Task<List<Note>> ReadAll();
     Task Update(Note note);
-    Task Delete(Guid id);
+    Task Delete(int id);
 }
 
 public class NoteService: INoteService
@@ -26,7 +26,7 @@ public class NoteService: INoteService
         await _dbContext.SaveChangesAsync();
     }
     
-    public async Task<Note> FindById(Guid id)
+    public async Task<Note> FindById(int id)
     {
         var note = await _dbContext.Notes.FindAsync(id);
         return note;
@@ -44,7 +44,7 @@ public class NoteService: INoteService
         await _dbContext.SaveChangesAsync();
     }
     
-    public async Task Delete(Guid id)
+    public async Task Delete(int id)
     {
         var note = await _dbContext.Notes.FindAsync(id);
         if (note != null) _dbContext.Notes.Remove(note);

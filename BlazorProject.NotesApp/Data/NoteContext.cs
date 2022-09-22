@@ -8,20 +8,20 @@ public class NoteContext: DbContext
     
     public NoteContext()
     {
-        SQLitePCL.Batteries_V2.Init();
+        //SQLitePCL.Batteries_V2.Init();
         //Database.EnsureDeleted();
         Database.EnsureCreated();
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var dbPath = Path.Combine(FileSystem.AppDataDirectory, "notes.db3");
-        
-        optionsBuilder
-            .UseSqlite($"Filename={dbPath}");
-
+        // var dbPath = Path.Combine(FileSystem.AppDataDirectory, "notes.db3");
+        //
         // optionsBuilder
-        //     .UseSqlServer("Data Source=localhost;Initial Catalog=NoteApp;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Password2022;");
+        //     .UseSqlite($"Filename={dbPath}");
+
+        optionsBuilder
+            .UseSqlServer("Data Source=localhost;Initial Catalog=NoteApp;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=Password2022;");
         
         // optionsBuilder
         //     .UseCosmos(
@@ -32,6 +32,6 @@ public class NoteContext: DbContext
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        //builder.Entity<Note>().ToContainer("Notes");
+        builder.Entity<Note>().ToContainer("Notes");
     }
 }

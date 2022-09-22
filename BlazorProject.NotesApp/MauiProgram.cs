@@ -19,8 +19,8 @@ namespace BlazorProject.NotesApp
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
-            //builder.Services.AddDbContext<NoteContext>();
-            //builder.Services.AddSingleton<INoteService, NoteService>();
+            builder.Services.AddDbContext<NoteContext>();
+            builder.Services.AddSingleton<INoteService, NoteService>();
             builder.Services.AddSingleton<WeatherForecastService>();
 
             return builder.Build();

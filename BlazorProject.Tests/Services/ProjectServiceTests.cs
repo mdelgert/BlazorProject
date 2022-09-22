@@ -37,4 +37,29 @@ public class ProjectServiceTests
         }
     }
     
+    [Fact]
+    public async Task UpdateAllTest()
+    {
+        var projects = await _projectService.ReadAll();
+        
+        foreach (var project in projects)
+        {
+            project.Name += "-Updated";
+            await _projectService.Update(project);
+            _testOutputHelper.WriteLine(project.Name);    
+        }
+    }
+    
+    [Fact]
+    public async Task DeleteAllTest()
+    {
+        var projects = await _projectService.ReadAll();
+        
+        foreach (var project in projects)
+        {
+            await _projectService.Delete(project.Id);
+            _testOutputHelper.WriteLine($"Deleting {project.Id}");    
+        }
+    }
+    
 }

@@ -26,7 +26,8 @@
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Save</button>
-        <button class="btn btn-light" @onclick="Cancel">Cancel</button>
+        @*<button class="btn btn-light" @onclick="Cancel">Cancel</button>*@
+        <a class="btn btn-light" href="/notelist">Cancel</a>
     </div>
 </EditForm>
 
@@ -45,15 +46,15 @@
         }
     }
 
-    protected async Task SaveNote()
+    private async Task SaveNote()
     {
         if (_note != null && _note.NoteId != 0)
         {
-            //await NoteService.Update(_note);
+            await NoteService.Update(_note);
         }
         else
         {
-            //if (_note != null) await NoteService.Create(_note);
+            if (_note != null) await NoteService.Create(_note);
         }
         Cancel();
     }
@@ -62,7 +63,6 @@
     {
         NavigationManager.NavigateTo("/notelist");
     }
-
-
+    
     //https://www.thecodebuzz.com/efcore-dbcontext-cannot-access-disposed-object-net-core/
 }

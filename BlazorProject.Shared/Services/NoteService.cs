@@ -7,9 +7,9 @@ public interface INoteService
     Task DeleteAll();
     Task CreateFakes(int batchSize);
     Task<int> Create(Note note);
-    Task<int> Update(Note note);
     Task<Note?> FindById(int id);
     Task<List<Note>> ReadAll();
+    Task Update(Note note);
     Task Delete(int id);
 }
 
@@ -52,17 +52,6 @@ public class NoteService: INoteService
         var id = await _dbContext.SaveChangesAsync();
         return id;
     }
-
-    public async Task<int> Update(Note note)
-    {
-        // _dbContext.Entry(note).State = EntityState.Modified;
-        // _dbContext.SaveChanges();
-        // return Task.CompletedTask;
-        
-        _dbContext.Notes.Update(note);
-        var id = await _dbContext.SaveChangesAsync();
-        return id;
-    }
     
     public async Task<Note?> FindById(int id)
     {
@@ -76,22 +65,12 @@ public class NoteService: INoteService
         return Task.FromResult(notes);
     }
     
-    //public async Task<int> Update(Note note)
-    //{
-    //    //_dbContext.Notes.Update(note);
-    //    //await _dbContext.SaveChangesAsync();
-
-    //    //_dbContext.Notes.Update(note);
-    //    //_dbContext.SaveChanges();
-    //    //return Task.CompletedTask;
-
-    //    _dbContext.Update(note);
-
-    //    var id = await _dbContext.SaveChangesAsync();
-
-    //    return id;
-    //}
-
+    public async Task Update(Note note)
+    {
+        _dbContext.Entry(note).State = EntityState.Modified;
+        await _dbContext.SaveChangesAsync();
+    }
+    
     public async Task Delete(int id)
     {
         var note = await _dbContext.Notes.FindAsync(id);
@@ -99,6 +78,33 @@ public class NoteService: INoteService
         await _dbContext.SaveChangesAsync();
     }
 }
+
+// public async Task<int> Update(Note note)
+// {
+//     // _dbContext.Entry(note).State = EntityState.Modified;
+//     // _dbContext.SaveChanges();
+//     // return Task.CompletedTask;
+//     
+//     _dbContext.Notes.Update(note);
+//     var id = await _dbContext.SaveChangesAsync();
+//     return id;
+// }
+    
+//public async Task<int> Update(Note note)
+//{
+//    //_dbContext.Notes.Update(note);
+//    //await _dbContext.SaveChangesAsync();
+
+//    //_dbContext.Notes.Update(note);
+//    //_dbContext.SaveChanges();
+//    //return Task.CompletedTask;
+
+//    _dbContext.Update(note);
+
+//    var id = await _dbContext.SaveChangesAsync();
+
+//    return id;
+//}
 
 
 //https://www.thecodebuzz.com/efcore-dbcontext-cannot-access-disposed-object-net-core/

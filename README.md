@@ -19,3 +19,7 @@ https://tutexchange.com/how-to-edit-and-update-form-in-blazor/
 https://tutexchange.com/simple-grid-view-with-blazor-and-entity-framework-core/
 
 https://github.com/saineshwar/BLAZOR-PLAYGROUND-SERIES
+
+https://learn.microsoft.com/en-us/azure/cosmos-db/sql/quickstart-dotnet?tabs=azure-cli%2Cwindows
+
+https://learn.microsoft.com/en-us/ef/core/providers/cosmos/?tabs=dotnet-core-cli
